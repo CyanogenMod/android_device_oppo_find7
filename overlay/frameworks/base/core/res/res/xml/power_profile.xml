@@ -73,5 +73,5 @@
         <value>239.7</value>
   </array>
   <!-- This is the battery capacity in mAh -->
-    <item name="battery.capacity">2500</item>
+    <item name="battery.capacity">2800</item>
 </device>
