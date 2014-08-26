@@ -94,8 +94,14 @@ static int check_vendor_module()
     return rv;
 }
 
+static const char *KEY_EXPOSURE_TIME = "exposure-time";
+static const char *KEY_EXPOSURE_TIME_VALUES = "exposure-time-values";
+
 static char *camera_fixup_getparams(int id, const char *settings)
 {
+    bool videoMode = false;
+    const char *exposureTimeValues = "0,1,500000,1000000,2000000,4000000,8000000,16000000,32000000,64000000";
+
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
@@ -103,6 +109,17 @@ static char *camera_fixup_getparams(int id, const char *settings)
     ALOGV("%s: original parameters:", __FUNCTION__);
     params.dump();
 #endif
+
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+        videoMode = (!strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true"));
+    }
+
+    /* Set supported exposure time values */
+    if (!videoMode) {
+        if (id == 0) {
+            params.set(KEY_EXPOSURE_TIME_VALUES, exposureTimeValues);
+        }
+    }
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
