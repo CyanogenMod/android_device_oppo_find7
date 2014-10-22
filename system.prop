@@ -7,7 +7,7 @@ rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 persist.radio.add_power_save=1
 
 # sensors
-ro.qc.sdk.camera.facialproc=true
+ro.qc.sdk.camera.facialproc=false
 ro.qc.sdk.gestures.camera=false
 ro.qc.sdk.sensors.gestures=true
 
