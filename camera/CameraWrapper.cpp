@@ -101,6 +101,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
 {
     bool videoMode = false;
     const char *exposureTimeValues = "0,1,500000,1000000,2000000,4000000,8000000,16000000,32000000,64000000";
+    const char *supportedSceneModes = "auto,asd,landscape,snow,beach,sunset,night,portrait,backlight,sports,steadyphoto,flowers,candlelight,fireworks,party,night-portrait,theatre,action,AR";
 
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
@@ -118,6 +119,14 @@ static char *camera_fixup_getparams(int id, const char *settings)
     if (!videoMode) {
         if (id == 0) {
             params.set(KEY_EXPOSURE_TIME_VALUES, exposureTimeValues);
+        }
+    }
+
+    /* Remove HDR from front camera */
+    if (params.get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES)) {
+        if (id == 1) {
+            params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                    supportedSceneModes);
         }
     }
 
