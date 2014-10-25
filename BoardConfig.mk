@@ -42,6 +42,7 @@ TARGET_INIT_VENDOR_LIB := libinit_find7
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/oppo/find7/rootdir/etc/fstab.qcom
+RECOVERY_VARIANT := cm
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := find7,find7a,X9007,X9006,FIND7
