@@ -1,4 +1,3 @@
-Device tree for Oppo Find7
+Copyright 2014 - The CyanogenMod Project
 
-Copyright 2014, The CyanogenMod Project
-
+Device configuration for Oppo Find7.
