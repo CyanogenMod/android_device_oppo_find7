@@ -101,6 +101,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
 {
     bool videoMode = false;
     const char *exposureTimeValues = "0,1,500000,1000000,2000000,4000000,8000000,16000000,32000000,64000000";
+    const char *supportedSceneModes = "auto,asd,landscape,snow,beach,sunset,night,portrait,backlight,sports,steadyphoto,flowers,candlelight,fireworks,party,night-portrait,theatre,action,AR";
 
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
@@ -111,13 +112,22 @@ static char *camera_fixup_getparams(int id, const char *settings)
 #endif
 
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
-        videoMode = (!strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true"));
+        videoMode = (!strcmp(params.get(
+                android::CameraParameters::KEY_RECORDING_HINT), "true"));
     }
 
-    /* Set supported exposure time values */
     if (!videoMode) {
+        /* Back camera */
         if (id == 0) {
+            /* Set supported exposure time values */
             params.set(KEY_EXPOSURE_TIME_VALUES, exposureTimeValues);
+        }
+
+        /* Front camera */
+        if (id == 1) {
+            /* Remove HDR scene mode */
+            params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                    supportedSceneModes);
         }
     }
 
@@ -146,7 +156,8 @@ static char *camera_fixup_setparams(int id, const char *settings)
 #endif
 
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
-        videoMode = (!strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true"));
+        videoMode = (!strcmp(params.get(
+                android::CameraParameters::KEY_RECORDING_HINT), "true"));
     }
 
     if (params.get(KEY_EXPOSURE_TIME)) {
