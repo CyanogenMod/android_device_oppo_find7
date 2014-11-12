@@ -18,7 +18,7 @@
 -include device/oppo/msm8974-common/BoardConfigCommon.mk
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
 TARGET_KERNEL_CONFIG := cyanogenmod_find7_defconfig
 
 # Bluetooth
