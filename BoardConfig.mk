@@ -19,3 +19,7 @@
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := find7,find7a,FIND7,X9006,X9007
+
+RED_LED_PATH := "/sys/class/leds/led:rgb_red/brightness"
+GREEN_LED_PATH := "/sys/class/leds/led:rgb_green/brightness"
+BLUE_LED_PATH := "/sys/class/leds/led:rgb_blue/brightness"
